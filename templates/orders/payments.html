@@ -102,6 +102,7 @@
                 </p>
                 <a href="{% url 'carts:checkout' %}" class="btn btn-primary btn-block"> Make Payment </a>
                 <a href="{% url 'stores:store' %}" class="btn btn-light btn-block mb-10">Continue Shopping</a>
+                <hr>
 
                 <!-- Set up a container element for the button -->
                 <div id="paypal-button-container"></div>
@@ -137,11 +138,12 @@
         return cookieValue;
     }
 
-    var amount  = "{{ grand_total }}"
-    var url     =  "{% url 'orders:payments' %}"
-    var csrftoken = getCookie('csrftoken');
-    var orderID = "{{ order.order_number}}"
-    var payment_method = 'PayPal'
+    var amount          = "{{ grand_total }}"
+    var url             =  "{% url 'orders:payments' %}"
+    var csrftoken       = getCookie('csrftoken');
+    var orderID         = "{{ order.order_number}}"
+    var payment_method  = 'PayPal'
+    var redirect_url    = "{% url 'orders:order-completed' %}"
 
     paypal.Buttons({
 
@@ -184,8 +186,13 @@
                             status: details.status,
                         }),
                     })
-                    // .then(response => response.json())
-                    // .then(data => console.log(data));
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('Success:',  data);
+                        console.log('Transaction Completed.');
+                        window.location.href = redirect_url + '?order_number='+data.order_number+'&payment_id='+data.transID;
+
+                    });
                 }
             });
         }
