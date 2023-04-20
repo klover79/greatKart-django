@@ -21,10 +21,6 @@ class Product(models.Model):
         return self.product_name
     
 
-
-    
-
-
 variation_category_choice =(
     ('color', 'color'),
     ('size', 'size'),
@@ -53,5 +49,3 @@ class Variation(models.Model):
     def __str__(self):   
         return self.variation_value
     
- 
-
