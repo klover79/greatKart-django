@@ -1,0 +1,32 @@
+<aside class="col-md-3">
+    <!--   SIDEBAR   -->
+    <ul class="list-group">
+        {% if request.path == '/accounts/dashboard/'  %}
+            <a class="list-group-item active" href="{% url 'accounts:dashboard' %}"> Dashboard</a>
+        {% else %}
+            <a class="list-group-item" href="{% url 'accounts:dashboard' %}"> Dashboard</a>
+        {% endif %}
+
+        {% if request.path == '/accounts/my_orders'  %}
+        <a class="list-group-item active" href="{% url 'accounts:my-orders' %}"> My Orders</a>
+        {% else %}
+        <a class="list-group-item" href="{% url 'accounts:my-orders' %}"> My Orders</a>
+        {% endif %}
+
+        {% if request.path == '/accounts/edit_profile'  %}
+        <a class="list-group-item active" href="{% url 'accounts:edit-profile' %}"> Edit Profile </a>
+        {% else %}
+        <a class="list-group-item" href="{% url 'accounts:edit-profile' %}"> Edit Profile </a>
+        {% endif %}
+
+        {% if request.path == '/accounts/change_password' %}
+        <a class="list-group-item active" href="{% url 'accounts:change-password' %}"> Change Password </a>
+        {% else %}
+        <a class="list-group-item" href="{% url 'accounts:change-password' %}"> Change Password </a>
+        {% endif %}
+
+    </ul>
+    <br>
+    <a class="btn btn-light btn-block" href="{% url 'accounts:logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
+    <!--   SIDEBAR .//END   -->
+</aside>
